@@ -36,7 +36,6 @@ if (empty($_POST['working'])){
 	if ($_POST['working'] == 1){
 		$showDevWorking = 1;	//set variable to display working
 	} else {
-	# Get client ID from form
 		$showDevWorking = 0;	//set variable to display working
 	}
 }
@@ -45,7 +44,7 @@ $randomNumberLength 		= 4;				//set variable for length of number
 $randomNumberTolerance 		= 2;				//set variable for amount identical integers to be tolerated
 $databaseMaxRecords 		= 10;				//set initial variable to be used in calculation of database records
 $databaseMaxRecordsWeigh 	= ($randomNumberTolerance +1) * 9 * 9 + $randomNumberLength; //calculate the number of records that our tolerance will make impossible
-for ($i = 1; $i < $randomNumberLength; $i++){	//loop through length
+for ($i = 1; $i < $randomNumberLength; $i++){				//loop through length
 	$databaseMaxRecords = $databaseMaxRecords * 10;			//set random number and concatenate
 }
 $databaseMaxRecords = ($databaseMaxRecords - $databaseMaxRecordsWeigh); // calculate the maximum amout of database records
@@ -63,7 +62,6 @@ if (empty($_POST['run'])){
 	// run getPin function carrying arguments across
 	$attemptPin = getPin($randomNumberLength,$randomNumberTolerance,$pincheckArray,$showDevWorking);
 	if ($showDevWorking == 1){
-		//echo "<br />PIN Number check: " . $attemptPin[1];
 		echo "<p>PIN Number: " . $attemptPin . "</p>";
 	}
 
@@ -82,6 +80,7 @@ function dbconnect()
 	$password 			= "";
 	$database 			= "pin";
 	$hostname 			= "localhost";
+
 	try {   
 		# MySQL with PDO_MYSQL  
 		$set = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
