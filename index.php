@@ -41,9 +41,9 @@ if (empty($_POST['working'])){
 }
 
 $randomNumberLength 		= 4;				//set variable for length of number
-$randomNumberTolerance 		= 2;				//set variable for amount identical integers to be tolerated
+$randomNumberTolerance 		= 3;				//set variable for amount identical integers to be tolerated
 $databaseMaxRecords 		= 10;				//set initial variable to be used in calculation of database records
-$databaseMaxRecordsWeigh 	= ($randomNumberTolerance +1) * 9 * 9 + $randomNumberLength; //calculate the number of records that our tolerance will make impossible
+$databaseMaxRecordsWeigh 	= ($randomNumberTolerance) * 9 * 9 + $randomNumberLength; //calculate the number of records that our tolerance will make impossible
 for ($i = 1; $i < $randomNumberLength; $i++){				//loop through length
 	$databaseMaxRecords = $databaseMaxRecords * 10;			//set random number and concatenate
 }
@@ -80,6 +80,7 @@ function dbconnect()
 	$password 			= "";
 	$database 			= "pin";
 	$hostname 			= "localhost";
+	# LIVE
 
 	try {   
 		# MySQL with PDO_MYSQL  
@@ -130,6 +131,7 @@ class Pin_index
 					$number .= rand(0,9);			//set random number and concatenate
 				}
 				if ($showDevWorking == 1){
+					echo "<p>Raw PIN Number: " . $number. "</p>";
 					echo "<p>Raw PIN Number (and number of times integer occurs): ";
 				}
 				for($i=0;$i<strlen($number);$i++) 	//set random number and concatenate
@@ -140,8 +142,10 @@ class Pin_index
 						echo $number[$i]; 
 						echo "(" . $stringCount . ")";
 					}
-					if ($stringCount > $randomNumberTolerance) {		//check integer account against tolerance variable
+					if ($stringCount == $randomNumberTolerance) {		//check integer account against tolerance variable
 						$stringCountBoo = 0;
+						echo "<p>Number: " . $number[$i] . " found : " . $stringCount . " times.</p>";
+						break;
 					}else{
 						$stringCountBoo = 1;
 					}
