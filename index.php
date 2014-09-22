@@ -81,7 +81,9 @@ function dbconnect()
 	$database 			= "pin";
 	$hostname 			= "localhost";
 	# LIVE
-
+    //$username                = "alan_couk";
+    //$database                = "alancoleman_couk_pin"; 
+    //$password                = "q1E1jh3K87YjLqJYQ3";
 	try {   
 		# MySQL with PDO_MYSQL  
 		$set = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
